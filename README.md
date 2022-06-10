@@ -30,9 +30,9 @@ string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.ConsultarStatus());
 ```
 
 ## Suporte
-Canais de suporte ElginPay:
-Discord: https://discord.gg/VjNMfGpg
-Github: https://github.com/ElginDeveloperCommunity/POS_Android_ElginPAY
+
+- Discord: https://discord.gg/VjNMfGpg
+- Github: https://github.com/ElginDeveloperCommunity/POS_Android_ElginPAY
 
 ## Sobre o SACFiscal & Automação
 <img src="https://www.sacfiscal.com.br/biosac64.png">
