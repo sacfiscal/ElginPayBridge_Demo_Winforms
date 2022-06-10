@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/ElginPayBridge_Demo_Winforms/v17
+/.vs
+/Exemplo_E1Bridge/bin
+/Exemplo_E1Bridge/obj
