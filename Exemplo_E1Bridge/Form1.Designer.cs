@@ -29,28 +29,28 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txPortaStatus = new System.Windows.Forms.NumericUpDown();
+            this.txPortaTransacao = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.txPortaStatus = new System.Windows.Forms.TextBox();
-            this.txPortaTransacao = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txValorVenda = new System.Windows.Forms.NumericUpDown();
             this.button3 = new System.Windows.Forms.Button();
-            this.txValorVenda = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txValorDebito = new System.Windows.Forms.NumericUpDown();
             this.button4 = new System.Windows.Forms.Button();
-            this.txValorDebito = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txParcelas = new System.Windows.Forms.NumericUpDown();
+            this.txValorCredito = new System.Windows.Forms.NumericUpDown();
             this.cbTipoParcelamento = new System.Windows.Forms.ComboBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.txParcelas = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txValorCredito = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
@@ -74,9 +74,15 @@
             this.txResposta = new System.Windows.Forms.RichTextBox();
             this.button12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txPortaStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txPortaTransacao)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorVenda)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorDebito)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txParcelas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorCredito)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -85,12 +91,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txPortaStatus);
+            this.groupBox1.Controls.Add(this.txPortaTransacao);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.txPortaStatus);
-            this.groupBox1.Controls.Add(this.txPortaTransacao);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtIP);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -99,6 +105,40 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Terminal";
+            // 
+            // txPortaStatus
+            // 
+            this.txPortaStatus.Location = new System.Drawing.Point(288, 60);
+            this.txPortaStatus.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.txPortaStatus.Name = "txPortaStatus";
+            this.txPortaStatus.Size = new System.Drawing.Size(100, 23);
+            this.txPortaStatus.TabIndex = 8;
+            this.txPortaStatus.Value = new decimal(new int[] {
+            3001,
+            0,
+            0,
+            0});
+            // 
+            // txPortaTransacao
+            // 
+            this.txPortaTransacao.Location = new System.Drawing.Point(288, 21);
+            this.txPortaTransacao.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
+            this.txPortaTransacao.Name = "txPortaTransacao";
+            this.txPortaTransacao.Size = new System.Drawing.Size(100, 23);
+            this.txPortaTransacao.TabIndex = 4;
+            this.txPortaTransacao.Value = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             // 
             // label3
             // 
@@ -138,22 +178,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // txPortaStatus
-            // 
-            this.txPortaStatus.Location = new System.Drawing.Point(288, 60);
-            this.txPortaStatus.Name = "txPortaStatus";
-            this.txPortaStatus.Size = new System.Drawing.Size(100, 23);
-            this.txPortaStatus.TabIndex = 3;
-            this.txPortaStatus.Text = "3001";
-            // 
-            // txPortaTransacao
-            // 
-            this.txPortaTransacao.Location = new System.Drawing.Point(288, 22);
-            this.txPortaTransacao.Name = "txPortaTransacao";
-            this.txPortaTransacao.Size = new System.Drawing.Size(100, 23);
-            this.txPortaTransacao.TabIndex = 2;
-            this.txPortaTransacao.Text = "3000";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -173,8 +197,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.txValorVenda);
+            this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(12, 118);
             this.groupBox2.Name = "groupBox2";
@@ -182,6 +206,21 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Venda";
+            // 
+            // txValorVenda
+            // 
+            this.txValorVenda.DecimalPlaces = 2;
+            this.txValorVenda.Location = new System.Drawing.Point(89, 31);
+            this.txValorVenda.Maximum = new decimal(new int[] {
+            -1593835521,
+            466537709,
+            54210,
+            0});
+            this.txValorVenda.Name = "txValorVenda";
+            this.txValorVenda.Size = new System.Drawing.Size(120, 23);
+            this.txValorVenda.TabIndex = 3;
+            this.txValorVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txValorVenda.ThousandsSeparator = true;
             // 
             // button3
             // 
@@ -192,14 +231,6 @@
             this.button3.Text = "Iniciar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // txValorVenda
-            // 
-            this.txValorVenda.Location = new System.Drawing.Point(89, 31);
-            this.txValorVenda.Name = "txValorVenda";
-            this.txValorVenda.Size = new System.Drawing.Size(100, 23);
-            this.txValorVenda.TabIndex = 1;
-            this.txValorVenda.Text = "1000";
             // 
             // label4
             // 
@@ -212,8 +243,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.txValorDebito);
+            this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Location = new System.Drawing.Point(12, 197);
             this.groupBox3.Name = "groupBox3";
@@ -221,6 +252,21 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Venda no Débito";
+            // 
+            // txValorDebito
+            // 
+            this.txValorDebito.DecimalPlaces = 2;
+            this.txValorDebito.Location = new System.Drawing.Point(89, 33);
+            this.txValorDebito.Maximum = new decimal(new int[] {
+            -1593835521,
+            466537709,
+            54210,
+            0});
+            this.txValorDebito.Name = "txValorDebito";
+            this.txValorDebito.Size = new System.Drawing.Size(120, 23);
+            this.txValorDebito.TabIndex = 4;
+            this.txValorDebito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txValorDebito.ThousandsSeparator = true;
             // 
             // button4
             // 
@@ -231,14 +277,6 @@
             this.button4.Text = "Iniciar";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // txValorDebito
-            // 
-            this.txValorDebito.Location = new System.Drawing.Point(89, 33);
-            this.txValorDebito.Name = "txValorDebito";
-            this.txValorDebito.Size = new System.Drawing.Size(100, 23);
-            this.txValorDebito.TabIndex = 4;
-            this.txValorDebito.Text = "1000";
             // 
             // label5
             // 
@@ -251,11 +289,11 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.txParcelas);
+            this.groupBox4.Controls.Add(this.txValorCredito);
             this.groupBox4.Controls.Add(this.cbTipoParcelamento);
             this.groupBox4.Controls.Add(this.button5);
-            this.groupBox4.Controls.Add(this.txParcelas);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.txValorCredito);
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Location = new System.Drawing.Point(12, 278);
             this.groupBox4.Name = "groupBox4";
@@ -263,6 +301,38 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Venda no Crédito";
+            // 
+            // txParcelas
+            // 
+            this.txParcelas.Location = new System.Drawing.Point(310, 22);
+            this.txParcelas.Name = "txParcelas";
+            this.txParcelas.Size = new System.Drawing.Size(67, 23);
+            this.txParcelas.TabIndex = 11;
+            this.txParcelas.Value = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            // 
+            // txValorCredito
+            // 
+            this.txValorCredito.DecimalPlaces = 2;
+            this.txValorCredito.Location = new System.Drawing.Point(89, 22);
+            this.txValorCredito.Maximum = new decimal(new int[] {
+            -1593835521,
+            466537709,
+            54210,
+            0});
+            this.txValorCredito.Name = "txValorCredito";
+            this.txValorCredito.Size = new System.Drawing.Size(120, 23);
+            this.txValorCredito.TabIndex = 6;
+            this.txValorCredito.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txValorCredito.ThousandsSeparator = true;
+            this.txValorCredito.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // cbTipoParcelamento
             // 
@@ -286,14 +356,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // txParcelas
-            // 
-            this.txParcelas.Location = new System.Drawing.Point(313, 22);
-            this.txParcelas.Name = "txParcelas";
-            this.txParcelas.Size = new System.Drawing.Size(35, 23);
-            this.txParcelas.TabIndex = 8;
-            this.txParcelas.Text = "1000";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -302,14 +364,6 @@
             this.label7.Size = new System.Drawing.Size(85, 15);
             this.label7.TabIndex = 7;
             this.label7.Text = "Qtde. Parcelas:";
-            // 
-            // txValorCredito
-            // 
-            this.txValorCredito.Location = new System.Drawing.Point(89, 22);
-            this.txValorCredito.Name = "txValorCredito";
-            this.txValorCredito.Size = new System.Drawing.Size(100, 23);
-            this.txValorCredito.TabIndex = 6;
-            this.txValorCredito.Text = "1000";
             // 
             // label6
             // 
@@ -542,7 +596,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 781);
+            this.ClientSize = new System.Drawing.Size(545, 749);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.txResposta);
             this.Controls.Add(this.button11);
@@ -560,12 +614,18 @@
             this.Text = "E1_Bridge";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txPortaStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txPortaTransacao)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorVenda)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorDebito)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txParcelas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txValorCredito)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -583,24 +643,18 @@
         private Label label2;
         private Button button2;
         private Button button1;
-        private TextBox txPortaStatus;
-        private TextBox txPortaTransacao;
         private Label label1;
         private TextBox txtIP;
         private GroupBox groupBox2;
         private Button button3;
-        private TextBox txValorVenda;
         private Label label4;
         private GroupBox groupBox3;
         private Button button4;
-        private TextBox txValorDebito;
         private Label label5;
         private GroupBox groupBox4;
         private ComboBox cbTipoParcelamento;
         private Button button5;
-        private TextBox txParcelas;
         private Label label7;
-        private TextBox txValorCredito;
         private Label label6;
         private GroupBox groupBox5;
         private Button button6;
@@ -623,5 +677,11 @@
         private Button button11;
         private RichTextBox txResposta;
         private Button button12;
+        private NumericUpDown txValorVenda;
+        private NumericUpDown txValorDebito;
+        private NumericUpDown txParcelas;
+        private NumericUpDown txValorCredito;
+        private NumericUpDown txPortaStatus;
+        private NumericUpDown txPortaTransacao;
     }
 }
