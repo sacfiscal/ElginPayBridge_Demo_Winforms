@@ -1,62 +1,61 @@
-using Newtonsoft.Json;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
 using System.Xml;
+using Elgin.Bridge;
+using Elgin.Bridge.Commom;
 
 namespace Exemplo_E1Bridge
 {
     public partial class E1_Bridge : Form
     {
+        private readonly E1Bridge bridge;
+
         public E1_Bridge()
         {
             InitializeComponent();
+            bridge = new E1Bridge();
         }
 
         public void ChecarCampos()
         {
-            if (String.IsNullOrEmpty(txtIP.Text))
+            if (string.IsNullOrEmpty(txtIP.Text))
             {
-                MessageBox.Show("Preencha o IP do Terminal");
+                MessageBox.Show(@"Preencha o IP do Terminal");
                 txtIP.Focus();
                 return;
             }
 
-            if (String.IsNullOrEmpty(txPortaTransacao.Text))
+            if (string.IsNullOrEmpty(txPortaTransacao.Text))
             {
-                MessageBox.Show("Preencha a porta de transação");
+                MessageBox.Show(@"Preencha a porta de transação");
                 txPortaTransacao.Focus();
                 return;
             }
 
-            if (String.IsNullOrEmpty(txPortaStatus.Text))
-            {
-                MessageBox.Show("Preencha a porta de status");
-                txPortaStatus.Focus();
-                return;
-            }
+            if (!string.IsNullOrEmpty(txPortaStatus.Text)) return;
+
+            MessageBox.Show(@"Preencha a porta de status");
+            txPortaStatus.Focus();
+            return;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             ChecarCampos();
-
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.ConsultarStatus());
-
+            var ret = bridge.ConsultarStatus();
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText($"ConsultarStatus: {ret.ResultText}");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ChecarCampos();
 
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.SetServer(txtIP.Text,
-                                                                                Int32.Parse(txPortaTransacao.Text),
-                                                                                Int32.Parse(txPortaStatus.Text)));
+            var ret = bridge.SetServer(txtIP.Text,
+                                       (int)txPortaTransacao.Value,
+                                       (int)txPortaStatus.Value);
 
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText($"SetServer: {ret}");
 
         }
 
@@ -64,10 +63,10 @@ namespace Exemplo_E1Bridge
         {
             ChecarCampos();
 
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.IniciaVenda(1,"PDV01", txValorVenda.Text));
+            var ret = bridge.IniciaVenda(1,"PDV01", txValorVenda.Value);
 
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText(ret.ResultText);
 
         }
 
@@ -80,48 +79,46 @@ namespace Exemplo_E1Bridge
         {
             ChecarCampos();
 
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.IniciaVendaDebito(1, "PDV01", txValorVenda.Text));
+            var ret = bridge.IniciaVendaDebito(1, "PDV01", txValorDebito.Value);
 
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText(ret.ResultText);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             ChecarCampos();
 
-            int op = cbTipoParcelamento.SelectedIndex;
-            op = op + 1;
+            var op = cbTipoParcelamento.SelectedIndex;
+            op += 1;
             if (op == 0)
             {
-                MessageBox.Show("Selecione o tipo de financiamento");
+                MessageBox.Show(@"Selecione o tipo de financiamento");
                 return;
             }
 
-            int parc = Int32.Parse(txParcelas.Text);
-
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.IniciaVendaCredito(1, "PDV01", txValorCredito.Text, op, parc));
+            var ret = bridge.IniciaVendaCredito(1, "PDV01", txValorCredito.Value, (TipoFinanciamento)op, (int)txParcelas.Value);
 
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText(ret.ResultText);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             ChecarCampos();
 
-            int op = cbOpcoesAdministrativas.SelectedIndex;
-            op = op + 1;
+            var op = cbOpcoesAdministrativas.SelectedIndex;
+            op += 1;
             if (op == 0)
             {
-                MessageBox.Show("Selecione a opção administrativa");
+                MessageBox.Show(@"Selecione a opção administrativa");
                 return;
             }
 
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.IniciaOperacaoAdministrativa(1, "PDV01", op));
+            var ret = bridge.IniciaOperacaoAdministrativa(1, "PDV01", (OperacaoAdm)op);
 
             txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            txResposta.AppendText(ret.ResultText);
         }
 
         private void radioButton1_Click(object sender, EventArgs e)
@@ -143,56 +140,26 @@ namespace Exemplo_E1Bridge
 
         private void button7_Click(object sender, EventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load("VENDA_SAT.xml");
-            string xml_sat = xml.InnerXml;
-            
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.ImprimirCupomSat(xml_sat));
-
-            txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            bridge.ImprimirCupomSat("VENDA_SAT.xml");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load("CANC_SAT.xml");
-            string xml_cancelamento = xml.InnerXml;
-            string qrCode = "kAmMUV2AFOP11vsbAwb4S1MrcnzIm8o6trefwjpRvpJaNGeXXcM2GKbs+aALc3WDxrimeOf9BdgoZl29RvtC1DmvqZ56oVEoRz0ymia1tHUdGPzuO035OuiEseEj3+gU+8NzGzqWQIJgqdgLOZgnmUP2aBOkC0QcokhHPVfwm9tJFQnQkzGzu4692+LtpxhLwEhnFjoZh+1hpBXn5AEcbMS4Lx751qvFlfZX0hsYJf5pKcFH88E3byU82MU8UD5p9fyX2qL5Ae+Uql1VLPqoJOsQmC2BCBkMW7oQRCCR0osz6eLX1DHHJU+stxKCkITlQnz6XJd4LKXifGZuZ25+Uw==";
-
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.ImprimirCupomSatCancelamento(xml_cancelamento, qrCode));
-
-            txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            const string qrCode = "kAmMUV2AFOP11vsbAwb4S1MrcnzIm8o6trefwjpRvpJaNGeXXcM2GKbs+aALc3WDxrimeOf9BdgoZl29RvtC1DmvqZ56oVEoRz0ymia1tHUdGPzuO035OuiEseEj3+gU+8NzGzqWQIJgqdgLOZgnmUP2aBOkC0QcokhHPVfwm9tJFQnQkzGzu4692+LtpxhLwEhnFjoZh+1hpBXn5AEcbMS4Lx751qvFlfZX0hsYJf5pKcFH88E3byU82MU8UD5p9fyX2qL5Ae+Uql1VLPqoJOsQmC2BCBkMW7oQRCCR0osz6eLX1DHHJU+stxKCkITlQnz6XJd4LKXifGZuZ25+Uw==";
+            bridge.ImprimirCupomSatCancelamento("CANC_SAT.xml", qrCode);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.Load("NFCe.xml");
-            string xml_nfce = xml.InnerXml;
-            string csc = "6ad7f390-7eb8-11ec-90d6-0242ac120003";
-
-            string retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.ImprimirCupomNfce(xml_nfce, 1, csc));
-
-            txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+            bridge.ImprimirCupomNfce("NFCe.xml", 1, "6ad7f390-7eb8-11ec-90d6-0242ac120003");
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string retornoDireto;
             if (rbSenhaCliente.Checked)
-            {
-                retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.SetSenha(string.Empty, false));
-            }
+                bridge.SetSenha(string.Empty, false);
             else
-            {
-                retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.SetSenhaServer(string.Empty, false));
-            }
-
-            txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+                bridge.SetSenhaServer(string.Empty, false);
 
         }
 
@@ -202,23 +169,15 @@ namespace Exemplo_E1Bridge
                     || string.IsNullOrWhiteSpace(txSenha.Text)
                     || string.IsNullOrWhiteSpace(txConfirmaSenha.Text))
             {
-                MessageBox.Show("As senhas não são iguais");
+                MessageBox.Show(@"As senhas não são iguais");
                 cbOpcoesAdministrativas.Focus();
                 return;
             }
 
-            string retornoDireto;
             if (rbSenhaCliente.Checked)
-            {
-                retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.SetSenha(string.Empty, false));
-            }
+                bridge.SetSenha(txSenha.Text, false);
             else
-            {
-                retornoDireto = Marshal.PtrToStringAnsi(FuncoesDLL.SetSenhaServer(string.Empty, false));
-            }
-
-            txResposta.Clear();
-            txResposta.AppendText(JsonConvert.SerializeObject(retornoDireto));
+                bridge.SetSenhaServer(txSenha.Text, false);
         }
     }
 }
